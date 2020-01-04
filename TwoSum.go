@@ -55,6 +55,9 @@ func twoSum(nums []int, target int) []int {
 	}
 
 	for k, v := range nums {
+
+		//先將nums的index k,存入res[0]
+		//下面做相減比對,如果有比對成功的,將另一個index存到res[1]
 		res[0] = k
 		value := target - v
 
@@ -62,7 +65,7 @@ func twoSum(nums []int, target int) []int {
 		//如果value值存在tmp這個map中,則返回index值和ok值給ture
 		//如果沒有index值則給0,ok值給false
 		index, ok := tmp[value]
-		//
+		//如果傳的是true,還有index的值不等於一開始的
 		if ok && index != k {
 			res[1] = index
 			break
@@ -71,3 +74,46 @@ func twoSum(nums []int, target int) []int {
 
 	return res
 }
+([]int{2, 7, 11, 15}, 26)
+
+
+map[int]int: map[]
+[]int, 2: [0 0]
+nums: [2 7 11 15]
+k: 0
+v: 2
+nums: [2 7 11 15]
+k: 1
+v: 7
+nums: [2 7 11 15]
+k: 2
+v: 11
+nums: [2 7 11 15]
+k: 3
+v: 15
+
+
+res[0]: 0
+value: 24
+target: 26
+v: 2
+tmp[value]: 0
+index: 0
+ok: false
+
+
+res[0]: 1
+value: 19
+target: 26
+v: 7
+tmp[value]: 0
+index: 0
+ok: false
+
+res[0]: 2
+value: 15
+target: 26
+v: 11
+tmp[value]: 3
+index: 3
+ok: true
