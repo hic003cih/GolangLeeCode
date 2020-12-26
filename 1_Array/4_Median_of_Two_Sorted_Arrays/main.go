@@ -6,10 +6,10 @@ func main() {
 	findMedianSortedArrays(nums1, nums2)
 }
 
-func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
+func findMedianSortedArrays(mis []int, njs []int) float64 {
 
-	lenMis, i := len(nums1), 0
-	lenNjs, j := len(nums2), 0
+	lenMis, i := len(mis), 0
+	lenNjs, j := len(njs), 0
 	res := make([]int, lenMis+lenNjs)
 
 	for k := 0; k < lenMis+lenNjs; k++ {
