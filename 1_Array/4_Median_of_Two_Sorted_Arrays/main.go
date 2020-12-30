@@ -42,6 +42,18 @@ func merge(nums1 []int, nums2 []int) []int {
 	nums1 = append(nums1, nums2...)
 
 	leftPoint := 0
+
+	for rightPoint := 1; rightPoint < len(nums); rightPoint++ {
+		if nums[rightPoint] > nums[leftPoint] {
+			tempRight := nums1[rightPoint]
+			nums1[rightPoint] = nums1[leftPoint]
+			nums1[leftPoint] = tempRight
+			leftPoint++
+			nums[leftPoint] = nums[rightPoint]
+		}
+	}
+	return leftPoint + 1
+
 	for rightPoint := 1; rightPoint < len(nums1); rightPoint++ {
 		if nums1[leftPoint] > nums1[rightPoint] {
 
@@ -51,6 +63,15 @@ func merge(nums1 []int, nums2 []int) []int {
 		}
 		leftPoint++
 	}
+	// for rightPoint := 1; rightPoint < len(nums1); rightPoint++ {
+	// 	if nums1[leftPoint] > nums1[rightPoint] {
+
+	// 		tempRight := nums1[rightPoint]
+	// 		nums1[rightPoint] = nums1[leftPoint]
+	// 		nums1[leftPoint] = tempRight
+	// 	}
+	// 	leftPoint++
+	// }
 
 	return nums1
 }
