@@ -3,14 +3,32 @@ package main
 import "fmt"
 
 func main() {
-	nums := []int{3, 2, 2, 3}
-	val := 0
+	nums := []int{3, 2, 3, 2, 3}
+	val := 3
 	//removeElement(nums, val)
 	fmt.Println(removeElement(nums, val))
 }
 
 func removeElement(nums []int, val int) int {
+
 	leftPoint := 0
+	//左指針從0開始,右指針也從0開始
+	for rightPoint, v := range nums {
+		//如果右指針的值不等於要消去的值
+		//把右邊的值往左移
+		//左指針加一
+		if v != val {
+			//fmt.Println(nums)
+			//如果左指針的值不等於要消去的值
+			//
+			nums[leftPoint] = nums[rightPoint]
+			leftPoint++
+		}
+	}
+	return leftPoint
+
+	//正確版
+	/* leftPoint := 0
 
 	for rightPoint, v := range nums {
 
@@ -20,7 +38,8 @@ func removeElement(nums []int, val int) int {
 			leftPoint++
 		}
 	}
-	return leftPoint
+	return leftPoint */
+
 	//removeNums := map[int]int{}
 	//removeNums := make([]int, 0)
 	//length := 0

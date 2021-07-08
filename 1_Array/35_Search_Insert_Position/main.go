@@ -9,14 +9,65 @@ import "fmt"
 //const nums1=[]int{1,3,5,6}
 //const tar=5
 
-func main()  {
+func main() {
 	//[1,3,5,6], 5
-	nums1:=[]int{1,3,5,6}
-	tar:=1
-	fmt.Print(searchInsert(nums1,tar))
+	nums1 := []int{1, 3, 5, 6}
+	tar := 1
+	fmt.Print(searchInsert(nums1, tar))
 }
 
 func searchInsert(nums []int, target int) int {
+
+	//二分法
+	//先設定左邊的數為0
+	left := 0
+	//設定右邊的數為nums的長度
+	right := len(nums)
+	//開始2分法
+	//右邊的數大於左邊
+	//持續比到左右相同
+	for left < right {
+
+		//取index中間值
+		//每次比完都要重新算一次
+		mid := int((left + right) / 2)
+		//如果target的值大於index中位數的值
+		//則把左邊的範圍往右縮小,左邊index等於中間值右邊一個數字
+		if target > nums[mid] {
+			left = mid + 1
+		} else {
+			//如果index中位數的值大於或等於target
+			//則把右邊index往移到index中位數
+			right = mid
+		}
+
+	}
+	return left
+
+	/* //二分法
+	//先設定左邊的數為0
+	left := 0
+	//設定右邊的數為nums的長度
+	right := len(nums)
+
+	//開始2分法
+	//右邊的數大於左邊
+	//持續比到左右相同
+	for left < right {
+		//取index中間值
+		mid := int((left + right) / 2)
+		//如果index中位數的值大於等於target
+		//則把右邊的範圍往左縮小,右邊index等於中間值右邊一個數字
+		if target <= nums[mid] {
+			right = mid
+		} else {
+			//如果index中位數的值小於target
+			//則把左邊index往移到index中位數+1
+			left = mid + 1
+		}
+	}
+	return left */
+
 	//暴力法
 	// hashTable :=map[int]int{}
 	// for i,v := range nums{
@@ -35,7 +86,7 @@ func searchInsert(nums []int, target int) int {
 	// 	if(i==(len(nums)-1)){
 	// 		return i+1
 	// 	}
-		
+
 	// 	if(nums[i]<=target&&nums[i+1]>target){
 	// 		return i+1
 	// 	}
@@ -44,16 +95,16 @@ func searchInsert(nums []int, target int) int {
 	// return 0
 
 	//二分法
-	left:=0
-	right:=len(nums)
+	/* left := 0
+	right := len(nums)
 
-	for left <right{
-		mid :=int((left+right) /2)
-		if(target<=nums[mid]){
+	for left < right {
+		mid := int((left + right) / 2)
+		if target <= nums[mid] {
 			right = mid
-		}else{
-			left = mid+1
+		} else {
+			left = mid + 1
 		}
 	}
-	return left
+	return left */
 }

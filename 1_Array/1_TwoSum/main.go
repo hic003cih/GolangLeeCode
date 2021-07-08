@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	nums := []int{3, 2, 4}
@@ -21,14 +23,16 @@ func twoSum(nums []int, target int) []int {
 	//}
 	//return nil
 	//哈希表
-	hashTable := map[int]int{}
-	for i, x := range nums {
-		if p, ok := hashTable[target-x]; ok {
-			fmt.Printf(string(p))
-			return []int{p, i}
+
+	hasTable := map[int]int{}
+
+	for i, v := range nums {
+		//x是map的值
+		if x, ok := hasTable[target-v]; ok {
+			return []int{x, i}
 		}
-		hashTable[x] = i
-		fmt.Printf(string(hashTable[x]))
+		//map index存value,值存nums是第幾位置
+		hasTable[v] = i
 	}
 	return nil
 }
