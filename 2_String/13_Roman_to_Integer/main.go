@@ -16,12 +16,22 @@ func main() {
 
 	fmt.Println(romanToInt("MCMXCIV"))
 }
-func romanToInt(roman string) int {
+
+var romanMap = map[byte]int{'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+
+func romanToInt(roman string) (ans int) {
 
 	n := len(roman)
-	if(n < ){
 
+	for i := range roman {
+		value := romanMap[roman[i]]
+		if (i < n-1) && value < romanMap[roman[i+1]] {
+			ans -= value
+		} else {
+			ans += value
+		}
 	}
+	return
 }
 
 /* 1994
@@ -95,7 +105,7 @@ XXVII 27
 
 例如 \texttt{XIV}XIV 可视作 \texttt{X}-\texttt{I}+\texttt{V}=10-1+5=14X−I+V=10−1+5=14。
 */
-/* 
+/*
 //把羅馬號碼對應到的值加到map表內
 //用byte類型,string存進去map,會自動轉成byte
 var symbolValues = map[byte]int{'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
@@ -120,7 +130,6 @@ func romanToInt(s string) (ans int) {
     }
     return
 } */
-
 //自己寫的
 /* //把羅馬號碼對應到的值加到map表內
 romanMap := map[string]int{}
