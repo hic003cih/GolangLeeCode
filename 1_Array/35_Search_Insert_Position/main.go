@@ -18,29 +18,16 @@ func main() {
 
 func searchInsert(nums []int, target int) int {
 
-	//二分法
-	//先設定左邊的數為0
 	left := 0
-	//設定右邊的數為nums的長度
 	right := len(nums)
-	//開始2分法
-	//右邊的數大於左邊
-	//持續比到左右相同
-	for left < right {
 
-		//取index中間值
-		//每次比完都要重新算一次
-		mid := int((left + right) / 2)
-		//如果target的值大於index中位數的值
-		//則把左邊的範圍往右縮小,左邊index等於中間值右邊一個數字
-		if target > nums[mid] {
-			left = mid + 1
-		} else {
-			//如果index中位數的值大於或等於target
-			//則把右邊index往移到index中位數
+	for left != right {
+		mid := (left + right) / 2
+		if nums[mid] >= target {
 			right = mid
+		} else {
+			left = mid + 1
 		}
-
 	}
 	return left
 

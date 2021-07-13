@@ -39,6 +39,6 @@ nums contains distinct values sorted in ascending order.
 可以用2分法來拆解
 
 1. 先找出中位數(最前index加長度),然後除已2
-2. 各訂一個left和right point,如果target值小於中位數,看左邊那段,把right指針移到中位數的位置
-3. 如果target值大於中位數,看又邊那段,把left指針移到(中位數+1)的位置
+2. 各訂一個left和right point,如果target值小於等於中位數,看左邊那段,把right指針移到中位數的位置
+3. 如果target值大於中位數,看又邊那段,把left指針移到(中位數+1)的位置(中位數+1是因為他比中位數大了,所以不可能是中位數,就直接中位數+1)
 4. 然後持續比大小,比到left和right指針一致就返回
