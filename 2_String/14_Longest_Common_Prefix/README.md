@@ -30,4 +30,11 @@ strs[i] consists of only lower-case English letters.
 
 ## 解題
    
-1. 循環去比對array的每個
+1. 先排除長度0的情況下,就不會有前綴,直接回傳空
+2. 預設array第一個index的string為前綴
+3. 計算array長度
+4. 寫一個比對prefix的func,比對兩個傳入的字串長度,取短的字串來當prefix
+5. 建一個迴圈比對,如果兩個字串的index的字母相同,然後index < length,index加1,繼續比對,直到兩個字串的index的字母不相同
+6. 最後跳出迴圈,回傳迴圈比對以後index以前的字母return str1[:index]
+7. 主func對array進行迴圈,從第二個開始,將prefix和array中第i個傳入比對prefix的程式
+8. 如果比對prefix的程式回傳的prefix長度為0,表示已經沒有prefix,主程式跳出迴圈
