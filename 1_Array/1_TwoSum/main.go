@@ -36,3 +36,21 @@ func twoSum(nums []int, target int) []int {
 	}
 	return nil
 }
+
+func searchInsert(nums []int, target int) int {
+	left := 0
+
+	right := len(nums)
+
+	for left < right {
+
+		mid := int((left + right) / 2)
+		if target > nums[mid] {
+			left = mid + 1
+		} else {
+			right = mid
+		}
+
+	}
+	return left
+}

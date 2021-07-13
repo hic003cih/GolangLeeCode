@@ -16,6 +16,13 @@ func main() {
 
 	fmt.Println(romanToInt("MCMXCIV"))
 }
+func romanToInt(roman string) int {
+
+	n := len(roman)
+	if(n < ){
+
+	}
+}
 
 /* 1994
 1000 +100 -1000 +10 -100 +1 -5
@@ -30,32 +37,6 @@ XXVII 27
 
 //把羅馬號碼對應到的值加到map表內
 //然後字母的部分轉成byte
-var symbolValues = map[byte]int{'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
-
-func romanToInt(s string) (ans int) {
-
-	//計算羅馬字串的長度
-	//字串可以直接計算長度出來
-	n := len(s)
-	//迴圈比對每個字母
-	for i := range s {
-		fmt.Println(i)
-		fmt.Println(s[i])
-		//s[i]->會取出string每個字母的byte值
-		//然後對應到map表內取出對應的數值
-		value := symbolValues[s[i]]
-		//如果index小於index總長度(表示不是最後一個字母)
-		//然後小於index右邊一位羅馬字母的值
-		//就要用減的
-		//反之則用加的
-		if i < n-1 && value < symbolValues[s[i+1]] {
-			ans -= value
-		} else {
-			ans += value
-		}
-	}
-	return
-}
 
 //自己寫的錯誤版
 /* func romanToInt(s string) int {
@@ -114,15 +95,26 @@ func romanToInt(s string) (ans int) {
 
 例如 \texttt{XIV}XIV 可视作 \texttt{X}-\texttt{I}+\texttt{V}=10-1+5=14X−I+V=10−1+5=14。
 */
-/* var symbolValues = map[byte]int{'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+/* 
+//把羅馬號碼對應到的值加到map表內
+//用byte類型,string存進去map,會自動轉成byte
+var symbolValues = map[byte]int{'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
 
 func romanToInt(s string) (ans int) {
+	//計算字串的長度
     n := len(s)
+    //迴圈做比對
+    //range string取出來的值是byte
     for i := range s {
+	//s[i]取出來的是byte
+	//用byte到symbolValues map中尋找看有沒有在裡面
         value := symbolValues[s[i]]
+	//比對到最後一個字母之前,因為最後一個字母肯定是要+,所以不用檢查
+	//上面條件輔和,如果取出來的value比右邊一個字母的Values小,代表要減
         if i < n-1 && value < symbolValues[s[i+1]] {
             ans -= value
         } else {
+	//其他情況下的就是直接加
             ans += value
         }
     }
