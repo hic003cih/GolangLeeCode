@@ -1,4 +1,3 @@
-
 /**
  * Forward declaration of isBadVersion API.
  * @param   version   your guess about first bad version
@@ -11,14 +10,27 @@ package main
 
 import "fmt"
 
-func main()  {
+func main() {
 	n := 8
 	bad := 4
 
-
 	fmt.Println(firstBadVersion(n))
 }
+func firstBadVersion(int n) {
+	left := 0
+	right := n
 
+	for left <= right {
+		mid := (left + right) / 2
+		if isBadVersion(mid) {
+			right = mid - 1
+		} else {
+			left = mid + 1
+		}
+	}
+	return left
+
+}
 
 //做不出來版
 /*func firstBadVersion(n int) int {
@@ -47,11 +59,11 @@ func main()  {
 	return n
 }*/
 
-
 //正確版
 /*func firstBadVersion(n int) int {
 	left, right := 1, n
-	// 循环直至区间左右端点相同
+	// 循环直至右邊小於左邊時
+	//表示已經找完了,
 	for left<=right{
 		//找到中間值
 		mid:=(left+right)/2
@@ -71,4 +83,3 @@ func main()  {
 	return left
 }
 */
-

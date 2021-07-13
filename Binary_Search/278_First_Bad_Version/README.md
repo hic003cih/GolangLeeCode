@@ -37,3 +37,4 @@ nums is sorted in ascending order.
    如果target大,就比對右半邊的
    如果target小,就比對左半邊的
    這樣就可以少比對一半的值
+2. 
