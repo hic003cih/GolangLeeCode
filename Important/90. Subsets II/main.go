@@ -51,46 +51,46 @@ func dfs(set []int, start int, nums []int) {
 //正確版
 //回溯算法
 //建立答案子集res
-// var res [][]int
-
-// func subsetsWithDup(nums []int) [][]int {
-// 	//建立一個答案子集res
-// 	res = make([][]int, 0)
-// 	//將array排序
-// 	sort.Ints(nums)
-// 	//執行第一次dfs
-// 	dfs([]int{}, nums, 0)
-// 	return res
-// }
-// func dfs(temp, num []int, start int) {
-// 	//建立一個長度為已取出的array數量的長度
-// 	tmp := make([]int, len(temp))
-// 	//將以取出的已取出的array複製到tmp
-// 	copy(tmp, temp)
-
-// 	fmt.Println(temp)
-// 	//將tmp存到res答案子集中
-// 	res = append(res, tmp)
-// 	//迴圈尋找array中的每個數
-// 	for i := start; i < len(num); i++ {
-// 		//如果i >不是自己本身(start),然後又等於上一層的數字(num[i-1])
-// 		//退出本次迴圈直接執行下次的迴圈
-// 		if i > start && num[i] == num[i-1] {
-// 			//退出本次迴圈直接執行下次的迴圈
-// 			continue
-// 		}
-// 		//將迴圈在array中數字存到temp中
-// 		temp = append(temp, num[i])
-// 		//再將temp去執行dfs,繼續往下一層找
-// 		dfs(temp, num, i+1)
-// 		//每個比對完以後沒有值
-// 		//將temp的最後一個位拿掉
-// 		//回到上一層繼續比對
-
-// 		fmt.Println("dfs下一層後的", temp)
-// 		temp = temp[:len(temp)-1]
-// 	}
-// }
+//var res [][]int
+//
+//func subsetsWithDup(nums []int) [][]int {
+//	//建立一個答案子集res
+//	res = make([][]int, 0)
+//	//將array排序
+//	sort.Ints(nums)
+//	//執行第一次dfs
+//	dfs([]int{}, nums, 0)
+//	return res
+//}
+//func dfs(temp, num []int, start int) {
+//	//建立一個長度為已取出的array數量的長度
+//	tmp := make([]int, len(temp))
+//	//將以取出的已取出的array複製到tmp
+//	copy(tmp, temp)
+//
+//	fmt.Println(temp)
+//	//將tmp存到res答案子集中
+//	res = append(res, tmp)
+//	//迴圈尋找array中的每個數
+//	for i := start; i < len(num); i++ {
+//		//如果i >不是自己本身(start),然後又等於上一層的數字(num[i-1])
+//		//退出本次迴圈直接執行下次的迴圈
+//		if i > start && num[i] == num[i-1] {
+//			//退出本次迴圈直接執行下次的迴圈
+//			continue
+//		}
+//		//將迴圈在array中數字存到temp中
+//		temp = append(temp, num[i])
+//		//再將temp去執行dfs,繼續往下一層找
+//		dfs(temp, num, i+1)
+//		//每個比對完以後沒有值
+//		//將temp的最後一個位拿掉
+//		//回到上一層繼續比對
+//
+//		fmt.Println("dfs下一層後的", temp)
+//		temp = temp[:len(temp)-1]
+//	}
+//}
 
 //自己寫的
 // func subsetsWithDup(nums []int) [][]int {
