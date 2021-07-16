@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	nums := []int{1, 2, 3}
+	nums := []int{1, 2,3}
 	//subsets(nums)
 	//fmt.Println(mask>>i&1 > 0)
 	fmt.Print(subsets(nums))
@@ -106,32 +106,75 @@ func main() {
 // 	}
 // }
 
-func subsets(nums []int) [][]int {
-	//宣告一個存結果的變數
-	res := [][]int{}
-	////宣告一個dfs func
-	var dfs func(i int, list []int)
-	//建立一個dfs func
-	dfs = func(i int, list []int) {
-		//如果i等於array長度
+//func subsets(nums []int) [][]int {
+//	//宣告一個存結果的變數
+//	res := [][]int{}
+//	////宣告一個dfs func
+//	var dfs func(i int, list []int)
+//	//建立一個dfs func
+//	dfs = func(i int, list []int) {
+//		//如果i等於array長度
+//
+//		//當i和array中的長度一樣時,表示已經找完全部數字了（因為i從０開始,如果和len一樣了,表示超出index了）
+//		//結束執行dfs,並把dfs循環得到的子集append到res
+//		if i == len(nums) {
+//			//建立list長度的array
+//			tmp := make([]int, len(list))
+//			//將傳入的list複製到tmp
+//			copy(tmp, list)
+//			fmt.Println("add to res",tmp)
+//			//將tmp append到res
+//			res = append(res, tmp)
+//			return
+//		}
+//		fmt.Println("befor dfs",i)
+//		//將nums中的數字提出來放到list中
+//		list = append(list, nums[i])
+//		//再來重新執行一次dfs,把i+1也放到list中
+//		dfs(i+1, list)
+//		fmt.Println("after dfs",i)
+//		fmt.Println("befor remove",list)
+//		//把已經加入過的子集存list中移除
+//		list = list[:len(list)-1]
+//		fmt.Println("after remove",list)
+//		fmt.Println("after remove then i ",i)
+//		dfs(i+1, list)
+//	}
+//	//先從長度0開始找,並傳入一個空子集
+//	dfs(0, []int{})
+//
+//	return res
+//}
 
-		if i == len(nums) {
-			//建立list長度的array
-			tmp := make([]int, len(list))
-			//將傳入的list複製到tmp
-			copy(tmp, list)
-			//將tmp append到res
-			res = append(res, tmp)
+
+func subsets(nums []int) (ans [][]int) {
+	//宣告一個存結果的變數
+	set := []int{}
+	////宣告一個dfs func
+	var dfs func(int)
+	dfs = func(cur int) {
+		fmt.Println("第",cur,"執行dfs")
+		// 记录答案
+		//如果ａｒｒａｙ中的數都執行過,將得到的子集存下來append到ans
+		if cur == len(nums) {
+			fmt.Println("第",cur,"執行dfs的",set)
+			ans = append(ans, append([]int(nil), set...))
 			return
 		}
-
-		list = append(list, nums[i])
-		dfs(i+1, list)
-
-		list = list[:len(list)-1]
-		dfs(i+1, list)
+		// 考虑选择当前位置
+		//將cur append到set中
+		set = append(set, nums[cur])
+		//再將 cur + 1 append到set中
+		//會一直重複執行dfs,直到array都循環過
+		dfs(cur + 1)
+		// 考虑不选择当前位置
+		//全部array都循環過將最尾數取出
+		set = set[:len(set)-1]
+		fmt.Println("取出後的",cur)
+		dfs(cur + 1)
 	}
-	dfs(0, []int{})
-
-	return res
+	//從第個開始
+	dfs(0)
+	return
 }
+
