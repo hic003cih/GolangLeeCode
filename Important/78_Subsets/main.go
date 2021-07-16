@@ -5,7 +5,8 @@ import (
 )
 
 func main() {
-	nums := []int{1, 2, 3}
+	nums := []int{1, 5}
+
 	//subsets(nums)
 	//fmt.Println(mask>>i&1 > 0)
 	fmt.Print(subsets(nums))
@@ -70,6 +71,7 @@ func main() {
 // 	return
 // }
 
+//正確版
 //回溯算法
 //宣告一個存結果的變數
 // var res [][]int
@@ -106,6 +108,7 @@ func main() {
 // 	}
 // }
 
+//官方正確版
 func subsets(nums []int) [][]int {
 	//宣告一個存結果的變數
 	res := [][]int{}
@@ -113,24 +116,41 @@ func subsets(nums []int) [][]int {
 	var dfs func(i int, list []int)
 	//建立一個dfs func
 	dfs = func(i int, list []int) {
+
+		//fmt.Println("第幾次呼叫", i)
+
+		//fmt.Println(list)
+
 		//如果i等於array長度
 
+		//當dfs func循環的長度等於array的長度時(當是1,2,3時)
+		//把子集存到答案中,跳出當前循環
+		//並將子集中的尾數去除(當是1,2,3時,去除3,變回1,2)
 		if i == len(nums) {
 			//建立list長度的array
 			tmp := make([]int, len(list))
-			//將傳入的list複製到tmp
+			//將子集存入tmp,給後面append到答案中用
 			copy(tmp, list)
-			//將tmp append到res
+			//append到答案中用
 			res = append(res, tmp)
+			//跳出該迴圈去執行子集中的尾數去除,回到上層繼續查找可能子集
 			return
 		}
-
+		//將array中的數字加到子集中
 		list = append(list, nums[i])
+		//重複呼叫自己本身,一直往下找有可能的子集(ex: 1往下找1,2,在往下找1,2,3)
 		dfs(i+1, list)
 
+		//將子集中的尾數去除(當是1,2,3時,去除3,變回1,2)
 		list = list[:len(list)-1]
+		//去除以後繼續進入dfs func循環中
+		//因為去除尾數就代表回到上一層(從1,2開始),繼續找子集
+		//但傳入的次數會繼續,例如:上面的i是3,跳出後,從1,2,3去掉最尾變1,2,但跳出後這邊的i是2,所以下面的i+1是3
+		//執行dfs後又會馬上跳出,1,2去掉最尾變1,跳出後這邊的i是1,所以下面的i+1是2
+		//執行dfs後,變成1,3,後面又在執行dfs,i+1是3,跳出,1,3去掉最尾變1
 		dfs(i+1, list)
 	}
+	//執行第一次的dfs func,傳入一個空子集
 	dfs(0, []int{})
 
 	return res

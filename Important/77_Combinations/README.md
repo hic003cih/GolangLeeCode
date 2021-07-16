@@ -1,40 +1,44 @@
-# [78. Subsets](https://leetcode.com/problems/two-sum/)
+# [77. Combinations
+](https://leetcode-cn.com/problems/combinations/)
 
 
 ## 題目
 
-Given an integer array nums of unique elements, return all possible subsets (the power set).
+Given two integers n and k, return all possible combinations of k numbers out of the range [1, n].
+給兩個整數(n,k),返回K所有可能的範圍[1,n]的組合
 
-給一個整數數組nums包含不同的元素,回傳所有可能子集(電源組)
+给定两个整数 n 和 k，返回 1 ... n 中所有可能的 k 个数的组合。
 
-給定唯一元素的整數數組 nums，返回所有可能的子集（冪集）。
-
-The solution set must not contain duplicate subsets. 
-解答組必須不包含重複的子集
-Return the solution in any order.
-以任何順序返回解答
-
-解決方案集不得包含重複的子集。以任何順序返回解決方案。
+You may return the answer in any order.
+你可以返回答案以任何順序的方式
  
 
 Example 1:
-```
-Input: nums = [1,2,3]
-Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
-```
 
+Input: n = 4, k = 2
+返回 1 ... 4 中所有可能的 2 个数的组合。
+Output:
+[
+  [2,4],
+  [3,4],
+  [2,3],
+  [1,2],
+  [1,3],
+  [1,4],
+]
 Example 2:
-```
-Input: nums = [0]
-Output: [[],[0]]
- ```
+
+Input: n = 1, k = 1
+返回 1 ... 1 中所有可能的 1 个数的组合。
+Output: [[1]]
+ 
 
 Constraints:
-```
-1 <= nums.length <= 10
--10 <= nums[i] <= 10
-All the numbers of nums are unique.
-```
+
+1 <= n <= 20
+1 <= k <= n
+
+
 
 ## 解題
 迭代法实现子集枚举
