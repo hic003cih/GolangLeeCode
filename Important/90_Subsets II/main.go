@@ -19,7 +19,7 @@ var ans [][]int
 
 func subsetsWithDup(nums []int) [][]int {
 
-	begin := make([]int, len(nums))
+	begin := make([]int, 0)
 
 	ans = make([][]int, 0)
 
@@ -31,11 +31,12 @@ func subsetsWithDup(nums []int) [][]int {
 
 func dfs(set []int, start int, nums []int) {
 
-	temp := make([]int, len(nums))
+	temp := make([]int, len(set))
 
 	copy(temp, set)
 
 	ans = append(ans, temp)
+
 	for i := start; i < len(nums); i++ {
 		if i > start && nums[i] == nums[i-1] {
 			continue
