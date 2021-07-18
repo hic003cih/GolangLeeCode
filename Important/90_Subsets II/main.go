@@ -15,39 +15,88 @@ func main() {
 	//fmt.Print(x)
 }
 
-var ans [][]int
+var ans[][]int
 
 func subsetsWithDup(nums []int) [][]int {
 
-	begin := make([]int, 0)
-
-	ans = make([][]int, 0)
+	beging :=make([]int,0)
 
 	sort.Ints(nums)
 
-	dfs(begin, 0, nums)
+	ans =make([][]int,0)
+
+	dsf(0,beging,nums)
+
 	return ans
 }
 
-func dfs(set []int, start int, nums []int) {
+func dsf(start int,set []int,nums []int)  {
 
-	temp := make([]int, len(set))
+		temp :=make([]int,len(set))
 
-	copy(temp, set)
+		copy(temp,set)
 
-	ans = append(ans, temp)
+		ans=append(ans,temp)
 
 	for i := start; i < len(nums); i++ {
-		if i > start && nums[i] == nums[i-1] {
+		if i > start && nums[i]==nums[i-1]{
 			continue
 		}
-		set = append(set, nums[i])
-		dfs(set, i+1, nums)
+		set = append(set,nums[i])
+
+		dsf(i+1,set,nums)
 
 		set = set[:len(set)-1]
 	}
 
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+//var ans [][]int
+//
+//func subsetsWithDup(nums []int) [][]int {
+//
+//	begin := make([]int, 0)
+//
+//	ans = make([][]int, 0)
+//
+//	sort.Ints(nums)
+//
+//	dfs(begin, 0, nums)
+//	return ans
+//}
+//
+//func dfs(set []int, start int, nums []int) {
+//
+//	temp := make([]int, len(set))
+//
+//	copy(temp, set)
+//
+//	ans = append(ans, temp)
+//
+//	for i := start; i < len(nums); i++ {
+//		if i > start && nums[i] == nums[i-1] {
+//			continue
+//		}
+//		set = append(set, nums[i])
+//		dfs(set, i+1, nums)
+//
+//		set = set[:len(set)-1]
+//	}
+//
+//}
 
 //正確版
 //回溯算法
