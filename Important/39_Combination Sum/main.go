@@ -50,8 +50,46 @@ func dfs(sum int, start int, set []int, nums []int, target int) {
 		set = set[:len(set)-1]
 		sum -= nums[i]
 	}
-
 }
+
+// Input: candidates = [2,3,5], target = 8
+// Output: [[2,2,2,2],[2,3,3],[3,5]]
+
+// func combinationSum(candidates []int, target int) [][]int {
+// 	begin := make([]int, 0)
+
+// 	ans = make([][]int, 0)
+
+// 	dfs(0, 0, begin, candidates, target)
+
+// 	return ans
+// }
+// func dfs(sum int, start int, set []int, nums []int, target int) {
+
+// 	if sum == target {
+// 		temp := make([]int, len(set))
+
+// 		copy(temp, set)
+
+// 		ans = append(ans, temp)
+
+// 		return
+// 	}
+// 	if sum > target {
+// 		return
+// 	}
+// 	for i := start; i < len(nums); i++ {
+// 		set = append(set, nums[i])
+
+// 		sum += nums[i]
+
+// 		dfs(sum, i, set, nums, target)
+
+// 		set = set[:len(set)-1]
+// 		sum -= nums[i]
+// 	}
+
+// }
 
 //正確版
 // func combinationSum(candidates []int, target int) [][]int {

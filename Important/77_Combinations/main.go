@@ -14,38 +14,31 @@ func main() {
 	//fmt.Print(x)
 }
 
-
 var ans [][]int
 
 func combine(n int, k int) [][]int {
+	begin :=make([]int, 0)
 
-	begin :=make([]int,0)
-
-	//為什麼在LeetCode一定要加
 	ans = make([][]int, 0)
 
-	dfs(1, begin, k, n)
+	dfs(1,begin,n,k)
 	return ans
 }
 func dfs(start int, set []int, setLen int, rang int) {
 
 	if len(set)==setLen{
-		temp :=make([]int,len(set))
+		temp :=make(int[], len(set))
 		copy(temp,set)
 		ans = append(ans,temp)
-		return
 	}
 
-	if len(set)+rang-start+1 < setLen {
-			return
-		}
-	for i := start; i <= rang ; i++ {
+	for i := start; i <= rang; i++ {
 		set = append(set,i)
-		dfs(i+1, set, setLen, rang)
+
+		dfs(i+1,set,setLen,rang)
+
 		set = set[:len(set)-1]
 	}
-
-
 }
 
 //自己寫的
