@@ -5,41 +5,42 @@ import (
 )
 
 func main() {
-	nums := []int{1, 2,3}
+	nums := []int{1, 2, 3}
 	//subsets(nums)
 	//fmt.Println(mask>>i&1 > 0)
 	fmt.Print(subsets(nums))
 	//fmt.Println(2>>0&1 > 0)
 	//fmt.Print(x)
 }
-var ans [][]int
-func  subsets(nums []int) [][]int {
 
-	set :=[]int{}
+var ans [][]int
+
+func subsets(nums []int) [][]int {
+
+	set := []int{}
 	ans = [][]int{}
 	//ans = make([][]int,0)
 
-	dsf(0,set,nums)
+	dfs(0, set, nums)
 
 	return ans
 }
 
-func  dsf(start int,set []int,nums []int)  {
+func dfs(start int, set []int, nums []int) {
 
-	//temp :=[]int{}
 	temp := make([]int, len(set))
-	copy(temp,set)
-	ans = append(ans,temp)
-	//if start == pth{
-	//	return
-	//}
+
+	copy(temp, set)
+
+	ans = append(ans, temp)
 
 	for i := start; i < len(nums); i++ {
-		set = append(set,nums[i])
-		dsf(i+1,set,nums)
+		set = append(set, nums[i])
+
+		dfs(i+1, set, nums)
+
 		set = set[:len(set)-1]
 	}
-
 }
 
 // Input: nums = [1,2,3]
@@ -136,7 +137,6 @@ func  dsf(start int,set []int,nums []int)  {
 // 	}
 // }
 
-
 //官方正確版
 //func subsets(nums []int) [][]int {
 //	//宣告一個存結果的變數
@@ -184,4 +184,3 @@ func  dsf(start int,set []int,nums []int)  {
 //
 //	return res
 //}
-

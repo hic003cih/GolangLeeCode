@@ -37,6 +37,7 @@ func dfs(sum int, start int, set []int, nums []int, target int) {
 
 		return
 	}
+
 	if sum > target {
 		return
 	}
@@ -45,10 +46,11 @@ func dfs(sum int, start int, set []int, nums []int, target int) {
 
 		sum += nums[i]
 
-		dfs(sum, i, set, nums, target)
+		dsf(sum, i, set, nums, target)
+
+		sum -= nums[i]
 
 		set = set[:len(set)-1]
-		sum -= nums[i]
 	}
 }
 
@@ -82,7 +84,7 @@ func dfs(sum int, start int, set []int, nums []int, target int) {
 // 		set = append(set, nums[i])
 
 // 		sum += nums[i]
-
+//              //因為自己本身也可以重複使用,所以要傳i
 // 		dfs(sum, i, set, nums, target)
 
 // 		set = set[:len(set)-1]
