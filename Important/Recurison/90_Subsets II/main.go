@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
 func main() {
@@ -18,34 +17,27 @@ func main() {
 var ans [][]int
 
 func subsetsWithDup(nums []int) [][]int {
-
-	beging := make([]int, 0)
-
-	sort.Ints(nums)
-
 	ans = make([][]int, 0)
 
-	dfs(0, beging, nums)
+	set := make([]int, 0)
+
+	dsf(0, nums, set)
 
 	return ans
 }
 
-func dfs(start int, set []int, nums []int) {
+func dsf(start int, nums []int, set []int) {
 
 	temp := make([]int, len(set))
-
 	copy(temp, set)
-
 	ans = append(ans, temp)
 
 	for i := start; i < len(nums); i++ {
-		if i > start && num[i] == num[i-1] {
+		if i > start && nums[i] == nums[i-1] {
 			continue
 		}
 		set = append(set, nums[i])
-
-		dfs(i+1, set, nums)
-
+		dsf(i+1, nums, set)
 		set = set[:len(set)-1]
 	}
 }
