@@ -2,86 +2,120 @@ package main
 
 import (
 	"fmt"
+	"sort"
 )
 
 func main() {
 	nums1 := []int{1, 2}
-	nums2 := []int{-1, 3}
+	nums2 := []int{-1, 5}
 	//findMedianSortedArrays(nums1, nums2)
 	fmt.Println(findMedianSortedArrays(nums1, nums2))
 
 }
 
-//正確版
-// func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
-// 	mergedNums := append(nums1, nums2...)
-
-// 	if len(mergedNums) < 2 {
-// 		return float64(mergedNums[0])
-// 	}
-// 	if len(mergedNums)%2 == 0 {
-
-// 	}
-
-// 	fmt.Println(mergedNums)
-// 	fmt.Println(findMax(mergedNums))
-
-// 	return 0.0
-// }
-
-// func findMax(nums []int) int {
-// 	sort.Ints(nums)
-
-// 	fmt.Println(nums)
-
-// 	return nums[len(nums)-1]
-// }
-
+//自己寫的版本,效能較差
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
-	totalLength := len(nums1) + len(nums2)
-	if totalLength%2 == 1 {
-		midIndex := totalLength / 2
-		return float64(getKthElement(nums1, nums2, midIndex+1))
+	mergedNums := append(nums1, nums2...)
+
+	sort.Ints(mergedNums)
+
+	fmt.Println(mergedNums)
+
+	ans := 0.0
+
+	mid := 0
+
+	if len(mergedNums) < 2 {
+		return float64(mergedNums[0])
+	}
+	//總長度除2如果餘0,代表示偶數
+	if len(mergedNums)%2 == 0 {
+		//總長度除2沒有餘1,就代表是偶數
+		//中位數會有兩個,除出來的數和除出來的數減1
+		//兩個相加除2就會變成中位數平均
+		mid = len(mergedNums) / 2
+		ans = (float64(mergedNums[mid]) + float64(mergedNums[mid-1])) / 2
+		return ans
 	} else {
-		midIndex1, midIndex2 := totalLength/2-1, totalLength/2
-		return float64(getKthElement(nums1, nums2, midIndex1+1)+getKthElement(nums1, nums2, midIndex2+1)) / 2.0
+		//總長度除2如果餘1,代表示奇數
+		//中位數就是totalLength除以2
+		//中位數是除出來的數
+		mid = len(mergedNums) / 2
+		return float64(mergedNums[mid])
 	}
-	return 0
+
+	//fmt.Println(mergedNums)
+	//fmt.Println(findMax(mergedNums))
+
+	return 0.0
 }
 
-func getKthElement(nums1, nums2 []int, k int) int {
-	index1, index2 := 0, 0
-	for {
-		if index1 == len(nums1) {
-			return nums2[index2+k-1]
-		}
-		if index2 == len(nums2) {
-			return nums1[index1+k-1]
-		}
-		if k == 1 {
-			return min(nums1[index1], nums2[index2])
-		}
-		half := k / 2
-		newIndex1 := min(index1+half, len(nums1)) - 1
-		newIndex2 := min(index2+half, len(nums2)) - 1
-		pivot1, pivot2 := nums1[newIndex1], nums2[newIndex2]
-		if pivot1 <= pivot2 {
-			k -= (newIndex1 - index1 + 1)
-			index1 = newIndex1 + 1
-		} else {
-			k -= (newIndex2 - index2 + 1)
-			index2 = newIndex2 + 1
-		}
-	}
-	return 0
-}
+// //官方正確版,校能較好,但複雜
+// func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
+// 	//先算出總長度
+// 	totalLength := len(nums1) + len(nums2)
+// 	//總長度除2如果餘1,代表示奇數
+// 	if totalLength%2 == 1 {
+// 		//中位數就是totalLength除以2
+// 		//中位數是除出來的數
+// 		midIndex := totalLength / 2
+// 		fmt.Println(midIndex)
+// 		return float64(getKthElement(nums1, nums2, midIndex+1))
+// 	} else {
+// 		//總長度除2沒有餘1,就代表是偶數
+// 		//中位數會有兩個,除出來的數和除出來的數減1
+// 		midIndex1, midIndex2 := totalLength/2-1, totalLength/2
+// 		fmt.Println(midIndex1)
+// 		fmt.Println(midIndex2)
+// 		return float64(getKthElement(nums1, nums2, midIndex1+1)+getKthElement(nums1, nums2, midIndex2+1)) / 2.0
+// 	}
+// 	return 0
+// }
 
-func min(x, y int) int {
-	if x < y {
-		return x
-	}
-	return y
-}
+// func getKthElement(nums1, nums2 []int, k int) int {
+// 	//建立兩個指針
+// 	index1, index2 := 0, 0
+// 	for {
+// 		//如果左指針等於nums1的長度
+// 		if index1 == len(nums1) {
+// 			return nums2[index2+k-1]
+// 		}
+// 		//如果右指針等於nums2的長度
+// 		if index2 == len(nums2) {
+// 			return nums1[index1+k-1]
+// 		}
+// 		//如果k==1,直接尋找最小值
+// 		if k == 1 {
+// 			return min(nums1[index1], nums2[index2])
+// 		}
+// 		//尋找中位數
+// 		half := k / 2
+// 		//如果新的index
+// 		newIndex1 := min(index1+half, len(nums1)) - 1
+
+// 		newIndex2 := min(index2+half, len(nums2)) - 1
+
+// 		//左指針右指針
+// 		pivot1, pivot2 := nums1[newIndex1], nums2[newIndex2]
+// 		//如果左指針小於右指針
+// 		if pivot1 <= pivot2 {
+// 			k -= (newIndex1 - index1 + 1)
+// 			index1 = newIndex1 + 1
+// 		} else {
+// 			k -= (newIndex2 - index2 + 1)
+// 			index2 = newIndex2 + 1
+// 		}
+// 	}
+// 	return 0
+// }
+
+// //尋找最小值
+// func min(x, y int) int {
+// 	if x < y {
+// 		return x
+// 	}
+// 	return y
+// }
 
 //只能用一次迴圈
 // func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {

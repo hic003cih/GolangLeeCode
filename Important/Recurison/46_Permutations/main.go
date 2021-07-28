@@ -22,31 +22,34 @@ func permute(nums []int) [][]int {
 
 	used := map[int]bool{}
 
-	dfs(nums, begin, used)
+	dfs(nums, used, begin)
 
 	return ans
 }
-func dfs(nums []int, set []int, used map[int]bool) {
+
+func dfs(nums []int, used map[int]bool, set []int) {
+
 	if len(set) == len(nums) {
 		temp := make([]int, len(set))
 
 		copy(temp, set)
-		ans = append(ans, temp)
 
-		return
+		ans = append(ans, temp)
 	}
 
-	for _, v := range nums {
-
-		if !used[v] {
+	for i, v := range nums {
+		fmt.Println(v)
+		if !used[i] {
+			used[i] = true
 			set = append(set, v)
-			used[v] = true
-			dfs(nums, set, used)
-			used[v] = false
+			dfs(nums, used, set)
+			used[i] = false
 			set = set[:len(set)-1]
+
 		}
 
 	}
+
 }
 
 // var ans [][]int

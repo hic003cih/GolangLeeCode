@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	nums := []int{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}
+	nums := []int{0, 1, 0, 2}
 	//subsets(nums)
 	//fmt.Println(mask>>i&1 > 0)
 	fmt.Print(trap(nums))
@@ -16,20 +16,28 @@ func main() {
 // func trap(height []int) int {
 
 // }
+
 func trap(height []int) (ans int) {
+	//找到array的長度
 	n := len(height)
+	//如果是0就返回
 	if n == 0 {
 		return
 	}
-
+	//建立左邊最高的array
 	leftMax := make([]int, n)
+	//預設左邊最高的為index 0
 	leftMax[0] = height[0]
+	//迴圈逐一比較array中每個數
+	//當前的i要存的是,leftMax的index-1和height的當前數,做比較後較高的
 	for i := 1; i < n; i++ {
 		leftMax[i] = max(leftMax[i-1], height[i])
 	}
-
+	//建立右邊最高的array
 	rightMax := make([]int, n)
+	//預設右邊最高的為index最後
 	rightMax[n-1] = height[n-1]
+
 	for i := n - 2; i >= 0; i-- {
 		rightMax[i] = max(rightMax[i+1], height[i])
 	}
@@ -40,6 +48,7 @@ func trap(height []int) (ans int) {
 	return
 }
 
+//尋找最小的
 func min(a, b int) int {
 	if a < b {
 		return a
@@ -47,6 +56,7 @@ func min(a, b int) int {
 	return b
 }
 
+//尋找最大的
 func max(a, b int) int {
 	if a > b {
 		return a
