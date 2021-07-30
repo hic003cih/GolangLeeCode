@@ -16,18 +16,15 @@ func main() {
 var ans [][]int
 
 func subsets(nums []int) [][]int {
+	begin := make([]int, 0)
+	ans = make([][]int, 0)
 
-	set := []int{}
-	ans = [][]int{}
-	//ans = make([][]int,0)
-
-	dfs(0, set, nums)
+	dfs(0, begin, nums)
 
 	return ans
 }
 
 func dfs(start int, set []int, nums []int) {
-
 	temp := make([]int, len(set))
 
 	copy(temp, set)
@@ -42,6 +39,36 @@ func dfs(start int, set []int, nums []int) {
 		set = set[:len(set)-1]
 	}
 }
+
+// var ans [][]int
+// func  subsets(nums []int) [][]int {
+
+// 	set :=[]int{}
+// 	ans = [][]int{}
+// 	//ans = make([][]int,0)
+
+// 	dsf(0,set,nums)
+
+// 	return ans
+// }
+
+// func  dsf(start int,set []int,nums []int)  {
+
+// 	//temp :=[]int{}
+// 	temp := make([]int, len(set))
+// 	copy(temp,set)
+// 	ans = append(ans,temp)
+// 	//if start == pth{
+// 	//	return
+// 	//}
+
+// 	for i := start; i < len(nums); i++ {
+// 		set = append(set,nums[i])
+// 		dsf(i+1,set,nums)
+// 		set = set[:len(set)-1]
+// 	}
+
+// }
 
 // Input: nums = [1,2,3]
 // Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
