@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"sort"
 )
 
 func main() {
@@ -18,34 +17,27 @@ func main() {
 var ans [][]int
 
 func subsetsWithDup(nums []int) [][]int {
-
-	beging := make([]int, 0)
-
-	sort.Ints(nums)
-
 	ans = make([][]int, 0)
 
-	dsf(0, beging, nums)
+	set := make([]int, 0)
+
+	dsf(0, nums, set)
 
 	return ans
 }
 
-func dsf(start int, set []int, nums []int) {
+func dsf(start int, nums []int, set []int) {
 
 	temp := make([]int, len(set))
-
 	copy(temp, set)
-
 	ans = append(ans, temp)
 
 	for i := start; i < len(nums); i++ {
-		if i > start && num[i] == num[i-1] {
+		if i > start && nums[i] == nums[i-1] {
 			continue
 		}
 		set = append(set, nums[i])
-
-		dsf(i+1, set, nums)
-
+		dsf(i+1, nums, set)
 		set = set[:len(set)-1]
 	}
 }
@@ -135,10 +127,10 @@ func dsf(start int, set []int, nums []int) {
 
 // 	sort.Ints(nums)
 
-// 	dsf(0, []int{}, nums, ans)
+// 	dfs(0, []int{}, nums, ans)
 // 	return ans
 // }
-// func dsf(i int, list []int, nums []int, ans [][]int) (list2 []int, ans2 [][]int) {
+// func dfs(i int, list []int, nums []int, ans [][]int) (list2 []int, ans2 [][]int) {
 
 // 	n := len(nums)
 // 	if i == n {
@@ -149,11 +141,11 @@ func dsf(start int, set []int, nums []int) {
 // 	}
 // 	list = append(list, nums[i])
 
-// 	dsf(i+1, list, nums, ans)
+// 	dfs(i+1, list, nums, ans)
 
 // 	list = list[:len(list)-1]
 
-// 	dsf(i+1, list, nums, ans)
+// 	dfs(i+1, list, nums, ans)
 
 // 	return list, ans
 // }

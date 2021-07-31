@@ -32,7 +32,6 @@ func dsf(used map[int]bool,set []int,nums []int,start int )  {
 		temp :=make([]int,len(set))
 
 		copy(temp,set)
-
 		ans = append(ans,temp)
 
 		return
@@ -50,6 +49,7 @@ func dsf(used map[int]bool,set []int,nums []int,start int )  {
 		}
 
 	}
+
 }
 
 //func permute(nums []int) [][]int {
@@ -93,7 +93,6 @@ func dsf(used map[int]bool,set []int,nums []int,start int )  {
 //
 //	}
 //}
-
 //正確版
 // var result [][]int
 // func permute(nums []int) [][]int {

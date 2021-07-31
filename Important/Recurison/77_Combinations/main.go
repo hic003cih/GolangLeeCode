@@ -35,9 +35,9 @@ func dfs(start int, set []int, setLen int, rang int) {
 		 	return
 	}
 	for i := start; i <= rang; i++ {
-		set = append(set,i)
+		set = append(set, i)
 
-		dfs(i+1,set,setLen,rang)
+		dfs(i+1, set, setLen, rang)
 
 		set = set[:len(set)-1]
 	}
