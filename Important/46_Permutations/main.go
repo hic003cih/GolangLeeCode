@@ -15,47 +15,84 @@ func main() {
 
 var ans [][]int
 
-func permute(nums []int) [][]int {
+func permute(nums []int) [][]int{
+	begin := make([]int,0)
 
-	begin := make([]int, 0)
+	ans = make([][]int,0)
 
-	ans = make([][]int, 0)
+	used:=map[int]bool{}
 
-	used := map[int]bool{}
-
-	//因為不用去除已經找過的,所不用繼續往下找
-	//可以看出元素1在[1,2]中已经使用过了
-	//但是在[2,1]中还要在使用一次1，所以处理排列问题就不用使用startIndex了。???
-	//不懂為什麼不需要晚上回去看影片
-	dfs(begin, nums, used)
+	dsf(used,begin,nums,0)
 
 	return ans
 }
-func dfs(set []int, nums []int, used map[int]bool) {
+func dsf(used map[int]bool,set []int,nums []int,start int )  {
 
-	if len(set) == len(nums) {
-		temp := make([]int, len(set))
+	if len(set)==len(set){
+		temp :=make([]int,len(set))
 
-		copy(temp, set)
+		copy(temp,set)
 
-		ans = append(ans, temp)
+		ans = append(ans,temp)
 
 		return
 	}
 
 	for i := 0; i < len(nums); i++ {
-		if !used[i] {
-			used[i] = true
-			set = append(set, nums[i])
+		if !used[i]  {
+			set = append(set,nums[i])
+			used[i]=true
 
-			dfs(set, nums, used)
-
+			dsf(used,set,nums,i+1)
 			set = set[:len(set)-1]
-			used[i] = false
+			used[i]=false
+
 		}
 
 	}
 }
+
+//func permute(nums []int) [][]int {
+//
+//	begin := make([]int, 0)
+//
+//	ans = make([][]int, 0)
+//
+//	used := map[int]bool{}
+//
+//	//因為不用去除已經找過的,所不用繼續往下找
+//	//可以看出元素1在[1,2]中已经使用过了
+//	//但是在[2,1]中还要在使用一次1，所以处理排列问题就不用使用startIndex了。???
+//	//不懂為什麼不需要晚上回去看影片
+//	dfs(begin, nums, used)
+//
+//	return ans
+//}
+//func dfs(set []int, nums []int, used map[int]bool) {
+//
+//	if len(set) == len(nums) {
+//		temp := make([]int, len(set))
+//
+//		copy(temp, set)
+//
+//		ans = append(ans, temp)
+//
+//		return
+//	}
+//
+//	for i := 0; i < len(nums); i++ {
+//		if !used[i] {
+//			used[i] = true
+//			set = append(set, nums[i])
+//
+//			dfs(set, nums, used)
+//
+//			set = set[:len(set)-1]
+//			used[i] = false
+//		}
+//
+//	}
+//}
 
 //正確版
 // var result [][]int
