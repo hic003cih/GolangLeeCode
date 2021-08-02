@@ -17,30 +17,64 @@ func main() {
 var ans [][]int
 
 func subsetsWithDup(nums []int) [][]int {
+
+	begin := make([]int, 0)
+
 	ans = make([][]int, 0)
 
-	set := make([]int, 0)
-
-	dsf(0, nums, set)
+	dsf(0, begin, nums)
 
 	return ans
+
 }
 
-func dsf(start int, nums []int, set []int) {
-
+func dsf(start int, set []int, nums []int) {
 	temp := make([]int, len(set))
+
 	copy(temp, set)
+
 	ans = append(ans, temp)
 
 	for i := start; i < len(nums); i++ {
 		if i > start && nums[i] == nums[i-1] {
 			continue
 		}
+
 		set = append(set, nums[i])
-		dsf(i+1, nums, set)
+
+		dsf(i+1, set, nums)
+
 		set = set[:len(set)-1]
 	}
 }
+
+// var ans [][]int
+
+// func subsetsWithDup(nums []int) [][]int {
+// 	ans = make([][]int, 0)
+
+// 	set := make([]int, 0)
+
+// 	dsf(0, nums, set)
+
+// 	return ans
+// }
+
+// func dsf(start int, nums []int, set []int) {
+
+// 	temp := make([]int, len(set))
+// 	copy(temp, set)
+// 	ans = append(ans, temp)
+
+// 	for i := start; i < len(nums); i++ {
+// 		if i > start && nums[i] == nums[i-1] {
+// 			continue
+// 		}
+// 		set = append(set, nums[i])
+// 		dsf(i+1, nums, set)
+// 		set = set[:len(set)-1]
+// 	}
+// }
 
 //var ans [][]int
 //

@@ -5,9 +5,9 @@ import (
 )
 
 func main() {
-	nums := []int{2, 3, 5}
+	nums := []int{2, 3, 6, 7}
 
-	target := 8
+	target := 7
 	//subsets(nums)
 	//fmt.Println(mask>>i&1 > 0)
 	fmt.Print(combinationSum(nums, target))
@@ -22,11 +22,12 @@ func combinationSum(candidates []int, target int) [][]int {
 
 	ans = make([][]int, 0)
 
-	dfs(0, 0, begin, candidates, target)
+	dfs(candidates, target, 0, begin, 0)
 
 	return ans
+
 }
-func dfs(sum int, start int, set []int, nums []int, target int) {
+func dfs(candidates []int, target int, start int, set []int, sum int) {
 
 	if sum == target {
 		temp := make([]int, len(set))
@@ -41,18 +42,57 @@ func dfs(sum int, start int, set []int, nums []int, target int) {
 	if sum > target {
 		return
 	}
-	for i := start; i < len(nums); i++ {
-		set = append(set, nums[i])
 
-		sum += nums[i]
+	for i := start; i < len(candidates); i++ {
+		set = append(set, candidates[i])
 
-		dsf(sum, i, set, nums, target)
+		sum += candidates[i]
 
-		sum -= nums[i]
+		dfs(candidates, target, i, set, sum)
+
+		sum -= candidates[i]
 
 		set = set[:len(set)-1]
 	}
+
 }
+
+// func combinationSum(candidates []int, target int) [][]int {
+// 	begin := make([]int, 0)
+
+// 	ans = make([][]int, 0)
+
+// 	dfs(0, 0, begin, candidates, target)
+
+// 	return ans
+// }
+// func dfs(sum int, start int, set []int, nums []int, target int) {
+
+// 	if sum == target {
+// 		temp := make([]int, len(set))
+
+// 		copy(temp, set)
+
+// 		ans = append(ans, temp)
+
+// 		return
+// 	}
+
+// 	if sum > target {
+// 		return
+// 	}
+// 	for i := start; i < len(nums); i++ {
+// 		set = append(set, nums[i])
+
+// 		sum += nums[i]
+
+// 		dsf(sum, i, set, nums, target)
+
+// 		sum -= nums[i]
+
+// 		set = set[:len(set)-1]
+// 	}
+// }
 
 // Input: candidates = [2,3,5], target = 8
 // Output: [[2,2,2,2],[2,3,3],[3,5]]
