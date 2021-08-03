@@ -71,24 +71,43 @@ func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 }
 
 //自己寫的版本,簡化版
-// func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
+func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 
-// 	mergedNums := append(nums1, nums2...)
+	//先做長度小於1的array的判斷
+	var midM = len(nums1) / 2
+	var midN = len(nums2) / 2
 
-// 	sort.Ints(mergedNums)
+	if len(nums1) == 0 {
+		if len(nums2)%2 == 0 {
+			return (float64(nums2[midN]) + float64(nums2[midN-1])) / 2
+		} else {
+			return (float64(nums2[midN]))
+		}
+	}
+	if len(nums2) == 0 {
+		if len(nums1)%2 == 0 {
+			return (float64(nums1[midM]) + float64(nums1[midM-1])) / 2
+		} else {
+			return (float64(nums1[midM]))
+		}
+	}
 
-// 	if len(mergedNums) < 2 {
-// 		return float64(mergedNums[0])
-// 	}
+	mergedNums := append(nums1, nums2...)
 
-// 	mid := len(mergedNums) / 2
+	sort.Ints(mergedNums)
 
-// 	if len(mergedNums)%2 == 0 {
-// 		return (float64(mergedNums[mid]) + float64(mergedNums[mid-1])) / 2
-// 	} else {
-// 		return (float64(mergedNums[mid]))
-// 	}
-// }
+	if len(mergedNums) < 2 {
+		return float64(mergedNums[0])
+	}
+
+	mid := len(mergedNums) / 2
+
+	if len(mergedNums)%2 == 0 {
+		return (float64(mergedNums[mid]) + float64(mergedNums[mid-1])) / 2
+	} else {
+		return (float64(mergedNums[mid]))
+	}
+}
 
 //自己寫的版本,效能較差
 // func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
