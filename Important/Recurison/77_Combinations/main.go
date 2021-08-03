@@ -15,23 +15,25 @@ func main() {
 }
 
 var ans [][]int
-
 func combine(n int, k int) [][]int {
-	begin := make([]int, 0)
 
-	ans = make([][]int, 0)
-
-	dfs(1, begin, k, n)
+	begin :=make([]int,0)
+	ans = make([][]int,0)
+	dfs(1,begin,k,n)
 	return ans
 }
 func dfs(start int, set []int, setLen int, rang int) {
-	if len(set) == setLen {
-		temp := make([]int, setLen)
-		copy(temp, set)
-		ans = append(ans, temp)
-		return
-	}
+	if len(set) ==setLen{
+		temp :=make([]int,len(set))
 
+		copy(temp,set)
+
+		ans = append(ans,temp)
+	}
+	//如果長度
+	if len(set)+rang-start+1 < setLen {
+		 	return
+	}
 	for i := start; i <= rang; i++ {
 		set = append(set, i)
 
@@ -39,6 +41,7 @@ func dfs(start int, set []int, setLen int, rang int) {
 
 		set = set[:len(set)-1]
 	}
+
 }
 
 //自己寫的
