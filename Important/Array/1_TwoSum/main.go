@@ -13,20 +13,34 @@ func main() {
 
 func twoSum(nums []int, target int) []int {
 	hashMap := map[int]int{}
+
 	for i := 0; i < len(nums); i++ {
-		//if x, ok := hasTable[target-v]; ok
-		if x, ok := hashMap[target-nums[i]]; ok {
-			return []int{x, i}
+		v, ok := hashMap[target-nums[i]]
+		if ok {
+			return []int{v, i}
 		}
-		// _, ok := hashMap[target-nums[i]]
-		// if ok == true {
-		// 	return []int{hashMap[target-nums[i]], i}
-		// }
 		hashMap[nums[i]] = i
 
 	}
 	return []int{}
 }
+
+// func twoSum(nums []int, target int) []int {
+// 	hashMap := map[int]int{}
+// 	for i := 0; i < len(nums); i++ {
+// 		//if x, ok := hasTable[target-v]; ok
+// 		if x, ok := hashMap[target-nums[i]]; ok {
+// 			return []int{x, i}
+// 		}
+// 		// _, ok := hashMap[target-nums[i]]
+// 		// if ok == true {
+// 		// 	return []int{hashMap[target-nums[i]], i}
+// 		// }
+// 		hashMap[nums[i]] = i
+
+// 	}
+// 	return []int{}
+// }
 
 // func main() {
 // 	nums := []int{3, 2, 4}
