@@ -15,41 +15,35 @@ func main() {
 
 var ans [][]int
 
-func permute(nums []int) [][]int{
-	begin := make([]int,0)
+func permute(nums []int) [][]int {
+	begin := make([]int, 0)
 
-	ans = make([][]int,0)
+	ans = make([][]int, 0)
 
-	used:=map[int]bool{}
+	used := map[int]bool{}
 
-	dsf(used,begin,nums,0)
+	dsf(used, begin, nums)
 
 	return ans
 }
-func dsf(used map[int]bool,set []int,nums []int,start int )  {
+func dsf(used map[int]bool, set []int, nums []int) {
 
-	if len(set)==len(set){
-		temp :=make([]int,len(set))
-
-		copy(temp,set)
-		ans = append(ans,temp)
-
+	if len(set) == len(nums) {
+		temp := make([]int, len(set))
+		copy(temp, set)
+		ans = append(ans, temp)
 		return
 	}
 
 	for i := 0; i < len(nums); i++ {
-		if !used[i]  {
-			set = append(set,nums[i])
-			used[i]=true
-
-			dsf(used,set,nums,i+1)
+		if !used[i] {
+			used[i] = true
+			set = append(set, nums[i])
+			dsf(used, set, nums)
 			set = set[:len(set)-1]
-			used[i]=false
-
+			used[i] = false
 		}
-
 	}
-
 }
 
 //func permute(nums []int) [][]int {
