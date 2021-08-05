@@ -15,12 +15,10 @@ func twoSum(nums []int, target int) []int {
 	hashMap := map[int]int{}
 
 	for i := 0; i < len(nums); i++ {
-		v, ok := hashMap[target-nums[i]]
-		if ok {
-			return []int{v, i}
+		if x, ok := hashMap[target-nums[i]]; ok {
+			return []int{x, i}
 		}
 		hashMap[nums[i]] = i
-
 	}
 	return []int{}
 }
