@@ -14,12 +14,11 @@ func main() {
 	x := threeSum(nums)
 	fmt.Print(x)
 }
-
 func threeSum(nums []int) [][]int {
 	sort.Ints(nums)
 	res := [][]int{}
+	for i := 0; i < len(nums); i++ {
 
-	for i := 0; i < len(nums)-2; i++ {
 		n1 := nums[i]
 		if n1 > 0 {
 			break
@@ -27,26 +26,63 @@ func threeSum(nums []int) [][]int {
 		if i > 0 && n1 == nums[i-1] {
 			continue
 		}
-		l, r := i+1, len(nums)-1
-		for l < r {
-			n2, n3 := nums[l], nums[r]
+		left, right := i+1, len(nums)-1
+
+		for left < right {
+			n2, n3 := nums[left], nums[right]
+
 			if n1+n2+n3 == 0 {
 				res = append(res, []int{n1, n2, n3})
-				for l < r && nums[l] == n2 {
-					l++
+				for left < right && nums[left] == n2 {
+					left++
 				}
-				for l < r && nums[r] == n3 {
-					r--
-				}
+				////不用也可以過
+				// for left < right && nums[right] == n3 {
+				// 	right--
+				// }
 			} else if n1+n2+n3 < 0 {
-				l++
+				left++
 			} else {
-				r--
+				right--
 			}
 		}
+
 	}
 	return res
 }
+
+// func threeSum(nums []int) [][]int {
+// 	sort.Ints(nums)
+// 	res := [][]int{}
+
+// 	for i := 0; i < len(nums)-2; i++ {
+// 		n1 := nums[i]
+// 		if n1 > 0 {
+// 			break
+// 		}
+// 		if i > 0 && n1 == nums[i-1] {
+// 			continue
+// 		}
+// 		l, r := i+1, len(nums)-1
+// 		for l < r {
+// 			n2, n3 := nums[l], nums[r]
+// 			if n1+n2+n3 == 0 {
+// 				res = append(res, []int{n1, n2, n3})
+// 				for l < r && nums[l] == n2 {
+// 					l++
+// 				}
+// 				for l < r && nums[r] == n3 {
+// 					r--
+// 				}
+// 			} else if n1+n2+n3 < 0 {
+// 				l++
+// 			} else {
+// 				r--
+// 			}
+// 		}
+// 	}
+// 	return res
+// }
 
 //用dsf未完成
 // var ans [][]int
@@ -128,6 +164,7 @@ func threeSum(nums []int) [][]int {
 // 				for l < r && nums[l] == n2 {
 // 					l++
 // 				}
+////				不用也可以過
 //				//當左指針小於右指針
 //				// 右指針又等於n3,將指針往右加
 // 				for l < r && nums[r] == n3 {
