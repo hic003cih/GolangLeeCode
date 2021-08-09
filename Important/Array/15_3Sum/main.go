@@ -18,7 +18,6 @@ func threeSum(nums []int) [][]int {
 	sort.Ints(nums)
 	res := [][]int{}
 	for i := 0; i < len(nums); i++ {
-
 		n1 := nums[i]
 		if n1 > 0 {
 			break
@@ -27,29 +26,59 @@ func threeSum(nums []int) [][]int {
 			continue
 		}
 		left, right := i+1, len(nums)-1
-
 		for left < right {
 			n2, n3 := nums[left], nums[right]
-
 			if n1+n2+n3 == 0 {
 				res = append(res, []int{n1, n2, n3})
 				for left < right && nums[left] == n2 {
 					left++
 				}
-				////不用也可以過
-				// for left < right && nums[right] == n3 {
-				// 	right--
-				// }
 			} else if n1+n2+n3 < 0 {
 				left++
 			} else {
 				right--
 			}
 		}
-
 	}
 	return res
 }
+
+// func threeSum(nums []int) [][]int {
+// 	sort.Ints(nums)
+// 	res := [][]int{}
+// 	for i := 0; i < len(nums); i++ {
+
+// 		n1 := nums[i]
+// 		if n1 > 0 {
+// 			break
+// 		}
+// 		if i > 0 && n1 == nums[i-1] {
+// 			continue
+// 		}
+// 		left, right := i+1, len(nums)-1
+
+// 		for left < right {
+// 			n2, n3 := nums[left], nums[right]
+
+// 			if n1+n2+n3 == 0 {
+// 				res = append(res, []int{n1, n2, n3})
+// 				for left < right && nums[left] == n2 {
+// 					left++
+// 				}
+// 				////不用也可以過
+// 				// for left < right && nums[right] == n3 {
+// 				// 	right--
+// 				// }
+// 			} else if n1+n2+n3 < 0 {
+// 				left++
+// 			} else {
+// 				right--
+// 			}
+// 		}
+
+// 	}
+// 	return res
+// }
 
 // func threeSum(nums []int) [][]int {
 // 	sort.Ints(nums)
