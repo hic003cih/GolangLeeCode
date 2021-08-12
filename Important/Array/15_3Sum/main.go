@@ -14,6 +14,7 @@ func main() {
 	x := threeSum(nums)
 	fmt.Print(x)
 }
+
 func threeSum(nums []int) [][]int {
 	sort.Ints(nums)
 	res := [][]int{}
@@ -43,6 +44,14 @@ func threeSum(nums []int) [][]int {
 	return res
 }
 
+//
+//
+//
+//
+//
+//
+//
+//
 // func threeSum(nums []int) [][]int {
 // 	sort.Ints(nums)
 // 	res := [][]int{}
