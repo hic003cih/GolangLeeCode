@@ -13,30 +13,35 @@ func main() {
 	//fmt.Print(x)
 }
 
+// Input: nums = [1,2,3]
+// Output: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]
 var ans [][]int
 
 func subsets(nums []int) [][]int {
-	begin := make([]int, 0)
-	ans = make([][]int, 0)
+	ans = [][]int{}
+	set := []int{}
 
-	dfs(0, begin, nums)
+	dfs(set, nums, 0)
 
 	return ans
 }
 
-func dfs(start int, set []int, nums []int) {
+func dfs(set []int, nums []int, start int) {
 	temp := make([]int, len(set))
-
 	copy(temp, set)
-
 	ans = append(ans, temp)
-
+	if len(set) == len(nums) {
+		return
+	}
 	for i := start; i < len(nums); i++ {
+		// fmt.Println(i)
 		set = append(set, nums[i])
-
-		dfs(i+1, set, nums)
-
+		// fmt.Println(set)
+		dfs(set, nums, i+1)
+		//不用
+		//i--
 		set = set[:len(set)-1]
+		// fmt.Println("刪除")
 	}
 }
 

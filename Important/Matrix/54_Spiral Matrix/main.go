@@ -15,10 +15,12 @@ func main() {
 	x := spiralOrder(matrix)
 	fmt.Print(x)
 }
+
 func spiralOrder(matrix [][]int) []int {
 	if len(matrix) == 0 {
 		return []int{}
 	}
+
 	res := []int{}
 
 	top, bottom, left, right := 0, len(matrix)-1, 0, len(matrix[0])-1
@@ -34,6 +36,7 @@ func spiralOrder(matrix [][]int) []int {
 			res = append(res, matrix[i][right])
 		}
 		right--
+		//??為什麼多這一步驟就可以過關
 		if len(res) == size {
 			break
 		}
@@ -48,6 +51,40 @@ func spiralOrder(matrix [][]int) []int {
 	}
 	return res
 }
+
+// func spiralOrder(matrix [][]int) []int {
+// 	if len(matrix) == 0 {
+// 		return []int{}
+// 	}
+// 	res := []int{}
+
+// 	top, bottom, left, right := 0, len(matrix)-1, 0, len(matrix[0])-1
+
+// 	size := len(matrix) * len(matrix[0])
+
+// 	for len(res) != size {
+// 		for i := left; i <= right; i++ {
+// 			res = append(res, matrix[top][i])
+// 		}
+// 		top++
+// 		for i := top; i <= bottom; i++ {
+// 			res = append(res, matrix[i][right])
+// 		}
+// 		right--
+// 		if len(res) == size {
+// 			break
+// 		}
+// 		for i := right; i >= left; i-- {
+// 			res = append(res, matrix[bottom][i])
+// 		}
+// 		bottom--
+// 		for i := bottom; i >= top; i-- {
+// 			res = append(res, matrix[i][left])
+// 		}
+// 		left++
+// 	}
+// 	return res
+// }
 
 // func spiralOrder(matrix [][]int) []int {
 // 	//如果matrix長度是0,返回0
