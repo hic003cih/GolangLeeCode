@@ -1,17 +1,22 @@
-# [329. Spiral Matrix](https://leetcode-cn.com/problems/spiral-matrix/)
+# [329. Longest Increasing Path in a Matrix](https://leetcode-cn.com/problems/longest-increasing-path-in-a-matrix/)
 
 
 ## 題目
 
-Given an m x n matrix, return all elements of the matrix in spiral order.
+Given an m x n integers matrix, return the length of the longest increasing path in matrix.
+
+From each cell, you can either move in four directions: left, right, up, or down. You may not move diagonally or move outside the boundary (i.e., wrap-around is not allowed).
+
 給一個m乘n的矩陣.返回所有矩陣元素使用
  
 
 Example 1:
 
 ```
-Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
-Output: [1,2,3,6,9,8,7,4,5]
+Input: matrix = [[9,9,4],[6,6,8],[2,1,1]]
+Output: 4
+Explanation: The longest increasing path is [1, 2, 6, 9].
+
 
 ```
 
