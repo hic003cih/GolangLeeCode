@@ -9,39 +9,40 @@ func main() {
 
 	//subsets(nums)
 	//fmt.Println(mask>>i&1 > 0)
-	fmt.Print(combine(1, 1))
+	fmt.Print(combine(4, 2))
 	//fmt.Println(2>>0&1 > 0)
 	//fmt.Print(x)
 }
 
 var ans [][]int
+
 func combine(n int, k int) [][]int {
 
-	begin :=make([]int,0)
-	ans = make([][]int,0)
-	dfs(1,begin,k,n)
+	begin := make([]int, 0)
+	ans = make([][]int, 0)
+	dfs(begin, n, k, 1)
 	return ans
 }
-func dfs(start int, set []int, setLen int, rang int) {
-	if len(set) ==setLen{
-		temp :=make([]int,len(set))
 
-		copy(temp,set)
+func dfs(set []int, n int, k int, start int) {
 
-		ans = append(ans,temp)
+	if len(set) == k {
+		temp := make([]int, len(set))
+
+		copy(temp, set)
+
+		ans = append(ans, temp)
+		return
 	}
-	//如果長度
-	if len(set)+rang-start+1 < setLen {
-		 	return
-	}
-	for i := start; i <= rang; i++ {
+
+	for i := start; i <= n; i++ {
+
 		set = append(set, i)
 
-		dfs(i+1, set, setLen, rang)
+		dfs(set, n, k, i+1)
 
 		set = set[:len(set)-1]
 	}
-
 }
 
 //自己寫的

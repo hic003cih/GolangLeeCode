@@ -13,13 +13,12 @@ func main() {
 
 func twoSum(nums []int, target int) []int {
 	hashMap := map[int]int{}
-	for j, v := range nums {
-		if i, ok := hashMap[target-v]; ok {
-			return []int{j, i}
+	for i := 0; i < len(nums); i++ {
+		if _, ok := hashMap[target-nums[i]]; ok {
+			return []int{hashMap[target-nums[i]], i}
 		}
-		hashMap[v] = j
+		hashMap[nums[i]] = i
 	}
-
 	return []int{}
 }
 
