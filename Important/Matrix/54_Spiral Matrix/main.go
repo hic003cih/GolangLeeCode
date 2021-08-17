@@ -20,7 +20,6 @@ func spiralOrder(matrix [][]int) []int {
 	if len(matrix) == 0 {
 		return []int{}
 	}
-
 	res := []int{}
 
 	top, bottom, left, right := 0, len(matrix)-1, 0, len(matrix[0])-1
@@ -36,7 +35,6 @@ func spiralOrder(matrix [][]int) []int {
 			res = append(res, matrix[i][right])
 		}
 		right--
-		//??為什麼多這一步驟就可以過關
 		if len(res) == size {
 			break
 		}
