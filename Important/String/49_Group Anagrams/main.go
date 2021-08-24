@@ -20,12 +20,11 @@ func groupAnagrams(strs []string) [][]string {
 
 	for _, v := range strs {
 		s := []byte(v)
-
 		sort.Slice(s, func(i, j int) bool {
-			return s[j] > s[i]
+			return s[i] < s[j]
 		})
-		convert := string(s)
-		mp[convert] = append(mp[convert], v)
+		sortedStr := string(s)
+		mp[sortedStr] = append(mp[sortedStr], v)
 	}
 	for _, v := range mp {
 		ans = append(ans, v)

@@ -32,7 +32,6 @@ func dsf(used map[int]bool, set []int, nums []int) {
 		temp := make([]int, len(set))
 		copy(temp, set)
 		ans = append(ans, temp)
-		return
 	}
 
 	for i := 0; i < len(nums); i++ {
@@ -43,8 +42,42 @@ func dsf(used map[int]bool, set []int, nums []int) {
 			set = set[:len(set)-1]
 			used[i] = false
 		}
+
 	}
 }
+
+// var ans [][]int
+
+// func permute(nums []int) [][]int {
+// 	begin := make([]int, 0)
+
+// 	ans = make([][]int, 0)
+
+// 	used := map[int]bool{}
+
+// 	dsf(used, begin, nums)
+
+// 	return ans
+// }
+// func dsf(used map[int]bool, set []int, nums []int) {
+
+// 	if len(set) == len(nums) {
+// 		temp := make([]int, len(set))
+// 		copy(temp, set)
+// 		ans = append(ans, temp)
+// 		return
+// 	}
+
+// 	for i := 0; i < len(nums); i++ {
+// 		if !used[i] {
+// 			used[i] = true
+// 			set = append(set, nums[i])
+// 			dsf(used, set, nums)
+// 			set = set[:len(set)-1]
+// 			used[i] = false
+// 		}
+// 	}
+// }
 
 //func permute(nums []int) [][]int {
 //
