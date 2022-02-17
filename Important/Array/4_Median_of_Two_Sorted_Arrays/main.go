@@ -6,39 +6,113 @@ import (
 )
 
 func main() {
-	nums1 := []int{1, 2}
-	nums2 := []int{-1, 5}
+	nums1 := []int{1, 2, 3, 4}
+	nums2 := []int{6, 7, 8}
 	//findMedianSortedArrays(nums1, nums2)
 	fmt.Println(findMedianSortedArrays(nums1, nums2))
 
 }
 
+//递归消除法
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
-	var midNum1 = len(nums1) / 2
-	var midNum2 = len(nums2) / 2
-
-	if len(nums1) == 0 {
-		return findMid(nums2, midNum2)
+	var m = len(nums1)
+	var n = len(nums2)
+	if n < m { // 确保nums1比nums2短，即确保m比n小
+		return findMedianSortedArrays(nums2, nums1)
 	}
-	if len(nums2) == 0 {
-		return findMid(nums1, midNum1)
+	//midM為num1的中位數
+	var midM = (m - 1) / 2
+	//midN為num2的中位數
+	var midN = (n - 1) / 2
+
+	//处理长度为0的情况
+	//如果短的num已經沒有長度可以刪除了,直接處理長的num找中位數
+	if m == 0 {
+		//長的num無法被偶數整除的話,代表還剩奇數個數量,直接返回中位數
+		if n%2 == 1 {
+			return float64(nums2[midN])
+		}
+		//長的num可以被偶數整除的話,代表還剩偶數個數量,要相加以後除2才能得出中位數
+		return float64(nums2[midN]+nums2[midN+1]) / 2
 	}
 
-	mergedNums := append(nums1, nums2...)
+	//最终到达边界的情况下，nums1的长度可能是1或者2。对于这两种情况，我们只需拿nums1剩下的数和nums2中间几位数进行排序，就能得到中位数。
 
-	sort.Ints(mergedNums)
+	if m == 1 || m == 2 { // 边界条件
+		if n < 3 { // n小于3的情况下，取nums2所有元素和nums1的元素进行排序
+			for i := 0; i < n; i++ {
+				nums1 = append(nums1, nums2[i])
+			}
+		} else if n%2 == 1 { // n大于2且为奇数的情况下，取nums2中间3位和nums1的元素进行排序
+			for i := midN - 1; i < midN+2; i++ {
+				nums1 = append(nums1, nums2[i])
+			}
+		} else { // 其他情况下，取nums2的中间4位和nums1的元素进行排序
+			for i := midN - 1; i < midN+3; i++ {
+				nums1 = append(nums1, nums2[i])
+			}
+		}
+		sort.Ints(nums1)
+		m = len(nums1)
+		midM = (m - 1) / 2
 
-	var midMergedNums = len(mergedNums) / 2
-	return findMid(mergedNums, midMergedNums)
+		if len(nums1)%2 == 1 {
+			return float64(nums1[midM])
+		} else {
+			return float64(nums1[midM]+nums1[midM+1]) / 2
+		}
+	}
+
+	//抓取要刪除的數量,兩個nums都要刪到一樣的長度,每次刪的數量是短的nums的一半
+	// n为奇数时，midNP==midN。
+	//奇數的時候不用+1,算出來的中位數直接就可以用
+	var midNP = midN
+	//n为偶数时，midNP==midN+1。
+	//偶数的時候要+1才能找到中位數
+	if n%2 == 0 {
+		midNP++
+	}
+
+	//兩個nums的中位數相同時,两值相等的情况下，其值就是中位数
+	if nums1[midM] == nums2[midNP] {
+		return float64(nums1[midM])
+	}
+	//如果較長的nums的中位數大於短的nums的中位數
+	if nums1[midM] < nums2[midNP] {
+		//消除nums1数组0至midM-1下标的元素，和nums2数组n-midM下标之后的元素
+		return findMedianSortedArrays(nums1[midM:], nums2[:n-midM])
+	}
+	//如果較短的nums的中位數大於長的nums的中位數
+	//消除nums2数组0至midM-1下标的元素，和nums1数组n-midM下标之后的元素
+	return findMedianSortedArrays(nums2[midM:], nums1[:m-midM])
 }
 
-func findMid(nums []int, mid int) float64 {
-	if len(nums)%2 == 0 {
-		return (float64(nums[mid]) + float64(nums[mid-1])) / 2
-	} else {
-		return float64(nums[mid])
-	}
-}
+// func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
+// 	var midNum1 = len(nums1) / 2
+// 	var midNum2 = len(nums2) / 2
+
+// 	if len(nums1) == 0 {
+// 		return findMid(nums2, midNum2)
+// 	}
+// 	if len(nums2) == 0 {
+// 		return findMid(nums1, midNum1)
+// 	}
+
+// 	mergedNums := append(nums1, nums2...)
+
+// 	sort.Ints(mergedNums)
+
+// 	var midMergedNums = len(mergedNums) / 2
+// 	return findMid(mergedNums, midMergedNums)
+// }
+
+// func findMid(nums []int, mid int) float64 {
+// 	if len(nums)%2 == 0 {
+// 		return (float64(nums[mid]) + float64(nums[mid-1])) / 2
+// 	} else {
+// 		return float64(nums[mid])
+// 	}
+// }
 
 //將findMid拆出重複使用
 // func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
