@@ -37,9 +37,10 @@ func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	}
 
 	//最终到达边界的情况下，nums1的长度可能是1或者2。对于这两种情况，我们只需拿nums1剩下的数和nums2中间几位数进行排序，就能得到中位数。
-
+	//如果nums2長度剩下1或2,拿nums1剩下的数和nums2中间几位数进行排序，就能得到中位数
 	if m == 1 || m == 2 { // 边界条件
-		if n < 3 { // n小于3的情况下，取nums2所有元素和nums1的元素进行排序
+		// n小于3的情况下，可以直接排序取中位數,將nums2所有元素和nums1的元素进行排序
+		if n < 3 {
 			for i := 0; i < n; i++ {
 				nums1 = append(nums1, nums2[i])
 			}
@@ -48,6 +49,7 @@ func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 				nums1 = append(nums1, nums2[i])
 			}
 		} else { // 其他情况下，取nums2的中间4位和nums1的元素进行排序
+
 			for i := midN - 1; i < midN+3; i++ {
 				nums1 = append(nums1, nums2[i])
 			}

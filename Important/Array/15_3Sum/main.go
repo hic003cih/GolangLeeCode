@@ -15,32 +15,63 @@ func main() {
 	fmt.Print(x)
 }
 func threeSum(nums []int) [][]int {
+	//先排序
 	sort.Ints(nums)
+	//生成一個map
 	res := [][]int{}
+	//迴圈比對全部數
 	for i := 0; i < len(nums); i++ {
+
+		//先選定一個數為n1
 		n1 := nums[i]
+		// 排序之后如果第一个元素已经大于零，那么无论如何组合都不可能凑成三元组，直接返回结果就可以了
 		if n1 > 0 {
 			break
 		}
+		//如果i不是index第一個數,並且值和前一個值一樣,則繼續執行
 		if i > 0 && n1 == nums[i-1] {
 			continue
 		}
+		//選定好n1後,設定左指針和右指針並取出值做比對
+		//左指針設定為i+1
+		//右指針設定為總長度減1(設定在最右邊)
 		left, right := i+1, len(nums)-1
+		//持續比對
 		for left < right {
+			// 去重复逻辑如果放在这里，0，0，0 的情况，可能直接导致 right<=left 了，从而漏掉了 0,0,0 这种三元组
+			/*
+			   while (right > left && nums[right] == nums[right - 1]) right--;
+			   while (right > left && nums[left] == nums[left + 1]) left++;
+			*/
+			//把右指針和左指針的值取出來
 			n2, n3 := nums[left], nums[right]
+			//如果三個值加起來為0
+			//將三個值加入res矩陣中
 			if n1+n2+n3 == 0 {
 				res = append(res, []int{n1, n2, n3})
+				// 因為不能有重複的,所以需要去重
+				// 有去重逻辑应该放在找到一个三元组之后
+				//如果右指針大於左指針,並且左指針的值等於當前的值,則左指針往右移
 				for left < right && nums[left] == n2 {
 					left++
 				}
+				//如果右指針大於左指針,並且右指針的值等於當前的值,則右指針往左移
+				for left < right && nums[right] == n3 {
+					right--
+				}
+				//如果三個數加起來小於0,則左指針往右移,繼續尋找
 			} else if n1+n2+n3 < 0 {
 				left++
+				//其他情況則右指針往內縮
 			} else {
 				right--
 			}
-		
+
+		}
 	}
+	return res
 }
+
 // func threeSum(nums []int) [][]int {
 // 	sort.Ints(nums)
 // 	res := [][]int{}
